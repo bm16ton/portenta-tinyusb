@@ -31,7 +31,9 @@
 #include "tusb.h"
 
 #include "usb_descriptors.h"
-
+#include "stm32h7xx_hal.h"
+#include "stm32h7xx.h"
+#include <math.h>
 //--------------------------------------------------------------------+
 // MACRO CONSTANT TYPEDEF PROTYPES
 //--------------------------------------------------------------------+
@@ -55,6 +57,7 @@ void hid_task(void);
 /*------------- MAIN -------------*/
 int main(void)
 {
+  SCB->VTOR = 0x08040000;
   board_init();
   tusb_init();
 
