@@ -83,8 +83,7 @@ static inline void board_stm32h7_clock_init(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 5;
-  RCC_OscInitStruct.PLL.PLLN = 160; // 400MHz Mode
-  //RCC_OscInitStruct.PLL.PLLN = 240; // 480MHz Mode
+  RCC_OscInitStruct.PLL.PLLN = 160;
   RCC_OscInitStruct.PLL.PLLP = 2;
   RCC_OscInitStruct.PLL.PLLQ = 16;
   RCC_OscInitStruct.PLL.PLLR = 2;
@@ -108,19 +107,19 @@ static inline void board_stm32h7_clock_init(void)
   
   PeriphClkInitStruct.PLL2.PLL2M = 5;
   //  PeriphClkInitStruct.PLL2.PLL2N = 115; // Max Freq @ 3v3 (overclocked SDRAM)
-  PeriphClkInitStruct.PLL2.PLL2N = 80;  // 100Mhz -> FMC
-  PeriphClkInitStruct.PLL2.PLL2P = 2;  // 57.5
-  PeriphClkInitStruct.PLL2.PLL2Q = 2; // 46
-  PeriphClkInitStruct.PLL2.PLL2R = 2;  // 115Mhz
+  PeriphClkInitStruct.PLL2.PLL2N = 80;  
+  PeriphClkInitStruct.PLL2.PLL2P = 2;  
+  PeriphClkInitStruct.PLL2.PLL2Q = 2; 
+  PeriphClkInitStruct.PLL2.PLL2R = 2; 
   PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_2;
   PeriphClkInitStruct.PLL2.PLL2VCOSEL = RCC_PLL2VCOWIDE;
   PeriphClkInitStruct.PLL2.PLL2FRACN = 0;
   // PLL 3
   PeriphClkInitStruct.PLL3.PLL3M = 5;
   PeriphClkInitStruct.PLL3.PLL3N = 160;
-  PeriphClkInitStruct.PLL3.PLL3P = 2; // 12.29Mhz
+  PeriphClkInitStruct.PLL3.PLL3P = 2; 
   PeriphClkInitStruct.PLL3.PLL3Q = 5;
-  PeriphClkInitStruct.PLL3.PLL3R = 2; // 24.xMhz
+  PeriphClkInitStruct.PLL3.PLL3R = 2; 
   PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
   PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
   PeriphClkInitStruct.PLL3.PLL3FRACN = 0;

@@ -77,14 +77,14 @@ uint8_t const * tud_descriptor_device_cb(void)
 
 #  define TUD_USBTMC_DESC_MAIN(_itfnum,_bNumEndpoints) \
      TUD_USBTMC_IF_DESCRIPTOR(_itfnum, _bNumEndpoints,  /*_stridx = */ 4u, TUD_USBTMC_PROTOCOL_USB488), \
-     TUD_USBTMC_BULK_DESCRIPTORS(/* OUT = */0x01, /* IN = */ 0x81, /* packet size = */USBTMCD_MAX_PACKET_SIZE)
+     TUD_USBTMC_BULK_DESCRIPTORS(/* OUT = */0x01, /* IN = */ 0x81, /* packet size = */512)
 
 #if CFG_TUD_USBTMC_ENABLE_INT_EP
 // USBTMC Interrupt xfer always has length of 2, but we use epMaxSize=8 for
 //  compatibility with mcus that only allow 8, 16, 32 or 64 for FS endpoints
 #  define TUD_USBTMC_DESC(_itfnum) \
      TUD_USBTMC_DESC_MAIN(_itfnum, /* _epCount = */ 3), \
-     TUD_USBTMC_INT_DESCRIPTOR(/* INT ep # */ 0x82, /* epMaxSize = */ 8, /* bInterval = */16u )
+     TUD_USBTMC_INT_DESCRIPTOR(/* INT ep # */ 0x82, /* epMaxSize = */ 64, /* bInterval = */8u )
 #  define TUD_USBTMC_DESC_LEN (TUD_USBTMC_IF_DESCRIPTOR_LEN + TUD_USBTMC_BULK_DESCRIPTORS_LEN + TUD_USBTMC_INT_DESCRIPTOR_LEN)
 
 #else

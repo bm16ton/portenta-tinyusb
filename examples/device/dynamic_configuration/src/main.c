@@ -29,7 +29,9 @@
 
 #include "bsp/board.h"
 #include "tusb.h"
-
+#include "stm32h7xx_hal.h"
+#include "stm32h7xx.h"
+#include <math.h>
 //--------------------------------------------------------------------+
 // MACRO CONSTANT TYPEDEF PROTYPES
 //--------------------------------------------------------------------+
@@ -54,6 +56,7 @@ void midi_task(void);
 /*------------- MAIN -------------*/
 int main(void)
 {
+  SCB->VTOR = 0x08040000;   
   board_init();
   tusb_init();
 
@@ -110,6 +113,7 @@ void cdc_task(void)
     // connected and there are data available
     if ( tud_cdc_available() )
     {
+
       uint8_t buf[64];
 
       // read and echo back
