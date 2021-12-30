@@ -1,4 +1,4 @@
-obj-m += leds-class.o
+obj-m += leds2-class.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules

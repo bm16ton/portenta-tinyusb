@@ -70,13 +70,27 @@ bool tud_vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_requ
     case TUSB_REQ_TYPE_VENDOR:
       if (request->bRequest == LED_ON)
       {
-		HAL_GPIO_WritePin(GPIOK, GPIO_PIN_7, 0);
-		HAL_GPIO_WritePin(GPIOK, GPIO_PIN_5, 1);
+		if ( request->wIndex == 0 )
+			{
+				HAL_GPIO_WritePin(GPIOK, GPIO_PIN_7, 0);
+//		HAL_GPIO_WritePin(GPIOK, GPIO_PIN_5, 1);
+			}
+	    else if ( request->wIndex == 1 )
+			{
+				HAL_GPIO_WritePin(GPIOK, GPIO_PIN_5, 0);
+			}
       }
 	  else if (request->bRequest == LED_OFF)
       {
-		HAL_GPIO_WritePin(GPIOK, GPIO_PIN_7, 1);
-		HAL_GPIO_WritePin(GPIOK, GPIO_PIN_5, 0);
+		if ( request->wIndex == 0 )
+			{
+				HAL_GPIO_WritePin(GPIOK, GPIO_PIN_7, 1);
+//		HAL_GPIO_WritePin(GPIOK, GPIO_PIN_5, 1);
+			}
+	    else if ( request->wIndex == 1 )
+			{
+				HAL_GPIO_WritePin(GPIOK, GPIO_PIN_5, 1);
+			}
       }
         // response with status OK
         return tud_control_status(rhport, request);
