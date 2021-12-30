@@ -262,6 +262,15 @@ uint32_t board_millis(void)
 }
 #endif
 
+void tud_cdc_line_coding_cb(__unused uint8_t itf, cdc_line_coding_t const* p_line_coding) {
+    if (p_line_coding->bit_rate == 1200) {
+  		HAL_GPIO_WritePin(GPIOK, GPIO_PIN_7, 1);
+  		HAL_GPIO_WritePin(GPIOK, GPIO_PIN_6, 0);
+  		HAL_GPIO_WritePin(GPIOK, GPIO_PIN_5, 1);
+        reboot1200bps();
+    }
+}
+
 void HardFault_Handler(void)
 {
   asm("bkpt");
