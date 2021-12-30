@@ -1,0 +1,16 @@
+so need to edit
+
+usb_avr_led_work2(struct work_struct *work2)
+{
+   struct my_usb *sd = container_of(work2, struct my_usb, work2);
+
+   usb_control_msg(sd->udev,
+                   usb_sndctrlpipe(sd->udev, 0),
+                   value2, USB_TYPE_VENDOR | USB_DIR_OUT,
+                   0, 0,
+                   NULL, 0,
+                   1000);
+}
+
+
+and one of those 0s is a brequest/index etc so need to change it to say a 1 then have firmware switch between the leds by looking at that number

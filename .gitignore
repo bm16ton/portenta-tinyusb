@@ -10,6 +10,10 @@ latex
 *.emSession
 *.elf
 *.ind
+*.cmd
+*.ko
+*.mod
+*.mod.c
 .env
 .settings/
 .idea/
