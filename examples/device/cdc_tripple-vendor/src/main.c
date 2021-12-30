@@ -44,6 +44,9 @@ int main(void)
   board_init();
 
   tusb_init();
+  HAL_GPIO_WritePin(GPIOK, GPIO_PIN_7, 0);
+  HAL_GPIO_WritePin(GPIOK, GPIO_PIN_5, 0);
+  HAL_GPIO_WritePin(GPIOK, GPIO_PIN_6, 1);
 
   while (1)
   {
@@ -53,6 +56,34 @@ int main(void)
 
   return 0;
 }
+
+#define LED_ON 1
+#define LED_OFF 0
+
+bool tud_vendor_control_xfer_cb(uint8_t rhport, uint8_t stage, tusb_control_request_t const * request)
+{
+  // nothing to with DATA & ACK stage
+  if (stage != CONTROL_STAGE_SETUP) return true;
+
+  switch (request->bmRequestType_bit.type)
+  {
+    case TUSB_REQ_TYPE_VENDOR:
+      if (request->bRequest == LED_ON)
+      {
+		HAL_GPIO_WritePin(GPIOK, GPIO_PIN_7, 0);
+      }
+	  else if (request->bRequest == LED_OFF)
+      {
+		HAL_GPIO_WritePin(GPIOK, GPIO_PIN_7, 1);
+      }
+        // response with status OK
+        return tud_control_status(rhport, request);
+      }
+
+  // stall unknown request
+  return 1;
+}
+
 
 void board_led_write2(bool state)
 {
