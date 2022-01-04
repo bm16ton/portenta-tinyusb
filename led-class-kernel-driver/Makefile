@@ -1,4 +1,4 @@
-obj-m += leds2-class.o
+obj-m += leds-tinyusb.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
